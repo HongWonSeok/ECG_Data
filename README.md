@@ -20,5 +20,5 @@
 * 데이터
   * rythm기반 분석을 위한 데이터 입니다.
   * 데이터는 [CinC](https://physionet.org/content/challenge-2017/1.0.0/) 데이터를 가져왔습니다.
-  * 해당 데이터에서 training2017 데이터를 사용했고, `util.py`     
+  * 해당 데이터에서 training2017 데이터를 사용했고, ECG-DualNet을 참고하여 `config.py`와 `util.py`의 함수들을 이용해 데이터로더를 구성하였습니다.
 
