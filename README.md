@@ -31,9 +31,9 @@
   * 데이터는 [CinC](https://physionet.org/content/challenge-2017/1.0.0/) 데이터를 가져왔습니다.
   * 해당 데이터에서 training2017 데이터를 사용했고, ECG-DualNet을 참고하여 `config.py`와 `util.py`와 `augmentations.py`의 클래스와 함수들을 이용해 데이터로더를 구성하였습니다.
  
-* 데이터로더
-  * `util.py`의 load_refer
-  * ECG데이터 하나마다 18000까지의 길이까지 가져옵니다.
-  * 
+* 데이터 로더  
+  * `util.py`의 load_references() 함수를 통해 ecg신호와 label에대한 list를 가져옵니다.
+  * ECG데이터 하나마다 18000까지의 길이까지 가져오고, 길이가 18000이 안되면 padding을 걸어줍니다.
+  * 이렇게 get_item()이 구성됩니다.
   
 
