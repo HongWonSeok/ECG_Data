@@ -14,97 +14,6 @@ import gzip
 import pickle
 
 
-
-class MITLoader_MLP(data.Dataset):
-
-    def __init__(self, csv_file, transforms: Callable = lambda x: x) -> None:
-        super().__init__()
-        self.annotations = pd.read_csv(csv_file).values
-        self.transforms = transforms
-
-    def __len__(self):
-        return self.annotations.shape[0]
-
-    def __getitem__(self, item):
-        signal = self.annotations[item, :-1]
-        label = int(self.annotations[item, -1])
-        # TODO: add augmentations
-        signal = torch.from_numpy(signal).float()
-        signal = self.transforms(signal)
-
-        return signal, torch.tensor(label).long()
-    
-    
-    
-class MITLoader_CNN_Transformer(data.Dataset):
-
-    def __init__(self, csv_file, transforms: Callable = lambda x: x) -> None:
-        super().__init__()
-        self.annotations = pd.read_csv(csv_file).values
-        self.transforms = transforms
-
-    def __len__(self):
-        return self.annotations.shape[0]
-
-    def __getitem__(self, item):
-        signal = self.annotations[item, :-1]
-        label = int(self.annotations[item, -1])
-        # TODO: add augmentations
-        signal = torch.from_numpy(signal).float()
-        signal = self.transforms(signal)
-
-        return signal.unsqueeze(0), torch.tensor(label).long()
-
-
-class Binary_MITLoader_MLP(data.Dataset):
-
-    def __init__(self, csv_file, transforms: Callable = lambda x: x) -> None:
-        super().__init__()
-        self.annotations = pd.read_csv(csv_file).values
-        self.transforms = transforms
-
-    def __len__(self):
-        return self.annotations.shape[0]
-
-    def __getitem__(self, item):
-        signal = self.annotations[item, :-1]
-        label = int(self.annotations[item, -1])
-
-        if label != 0:
-            label = 1
-        # TODO: add augmentations
-        signal = torch.from_numpy(signal).float()
-        signal = self.transforms(signal)
-
-        return signal, torch.tensor(label).long()
-    
-    
-    
-class Binary_MITLoader_CNN_Transformer(data.Dataset):
-
-    def __init__(self, csv_file, transforms: Callable = lambda x: x) -> None:
-        super().__init__()
-        self.annotations = pd.read_csv(csv_file).values
-        self.transforms = transforms
-
-    def __len__(self):
-        return self.annotations.shape[0]
-
-    def __getitem__(self, item):
-        signal = self.annotations[item, :-1]
-        label = int(self.annotations[item, -1])
-        
-        if label != 0:
-            label = 1
-        # TODO: add augmentations
-        signal = torch.from_numpy(signal).float()
-        signal = self.transforms(signal)
-
-        return signal.unsqueeze(0), torch.tensor(label).long()
-
-
-
-
 class IcentiaLoader_MLP(data.Dataset):
 
     def __init__(self,path, transforms: Callable = lambda x: x) -> None:
@@ -327,7 +236,7 @@ class IcentiaLoader_MLP_batch(data.Dataset):
             # Classes to one hot
             # one_hot_classes = F.one_hot(classes, num_classes=4) 
             
-        return inputs,  classes
+        return inputs,  spectrograms, classes
     
             
             
@@ -447,4 +356,4 @@ class CinCLoader(data.Dataset):
       
         ecg_lead = torch.tensor(ecg_lead, dtype=torch.float32)
         ecg_label = torch.tensor(ecg_label, dtype=torch.long)
-        return ecg_lead , ecg_label
+        return ecg_lead , spectrogram, ecg_label
