@@ -91,6 +91,7 @@ class IcentiaLoader_MLP_batch(data.Dataset):
 
     def __getitem__(self, item: int) -> Tuple[torch.Tensor, torch.Tensor]:
         # batch단위로 파일 가져옴(돌려보니까 그냥 sample가져옴).
+        spectrograms = []
         with gzip.open(self.paths[item][0], "rb") as file:
             inputs = torch.from_numpy(pickle.load(file)).float()
         with gzip.open(self.paths[item][1], "rb") as file:
@@ -330,7 +331,7 @@ class CinCLoader(data.Dataset):
         """
         # Get ecg lead, label, and name
         
-        
+        spectrogram = []
         ecg_lead = self.ecg_leads[item][:self.ecg_sequence_length]
   
         
