@@ -1,9 +1,6 @@
 from typing import Tuple, List, Optional
 
-from model.models import SIMPLEMLP, SIMPLEMLP_CinC,SIMPLEMLP_Icentia, ECG1DCNN, ECGformer
-from model.metrics import Metrics
-from model.loss import Weighted_CE_Loss
-from data.data_loader import MITLoader_MLP , MITLoader_CNN_Transformer, Binary_MITLoader_MLP, Binary_MITLoader_CNN_Transformer, IcentiaLoader_MLP, IcentiaLoader_MLP_batch, CinCLoader
+from data.data_loader import IcentiaLoader_MLP, IcentiaLoader_MLP_batch, CinCLoader
 import torch.utils.data as data
 from torch.utils.data import random_split
 from data.augmentations import Compose, RandomNoise, RandomShift, AugmentationPipeline
@@ -53,6 +50,7 @@ def get_data_loaders(data_args, model_args):
                         drop_last=True
                     )
                 }
+                
         elif data_args['type'] == "Icentia_batch":
                 print("DataSet : Icentia_batch")
                 
@@ -185,60 +183,7 @@ def get_trans():
     return transforms
 
 
-def get_model(args, data_args):
-    name = args['type'].upper()
-    
-    if name == "MLP":
-        if data_args["type"] == 'CinC':  
-            return SIMPLEMLP_CinC(args['args']['num_classes'])
-        elif data_args["type"] == 'MIT-BIH':  
-            return SIMPLEMLP(args['args']['num_classes'])
-        elif data_args["type"] == 'Icentia_batch':  
-            return SIMPLEMLP_Icentia(args['args']['num_classes'])
-    elif name == "CNN":
-        return ECG1DCNN(args['args']['num_classes'])
-    elif name == "TRANSFORMER":
-        return ECGformer(args['args']['num_layers'],
-                         args['args']['signal_length'],
-                         args['args']['num_classes'],
-                         args['args']['input_channels'],
-                         args['args']['embed_size'],
-                         args['args']['num_heads'],
-                         args['args']['expansion'])
-    
-    
-def get_metric(type, ave, args, model_args, metrics):
-
-# def get_metric(args, model_args, metrics):   
-    # if args['type'] == "f1":
-    #     return metrics.f1_score(args, model_args)
-
-    # elif args['type'] == "AUROC":
-    #     return metrics.AUROC(args, model_args)
-
-    # elif args['type'] == "AUPRC":
-    #     return metrics.AUPRC(args, model_args)
-    if type == "f1":
-        if ave == 'micro':
-            return metrics.f1_score(args['metrics']['task'] ,ave, model_args)
-        elif ave == 'weighted':
-            return metrics.f1_score(args['metrics']['task'] ,ave, model_args)
-
-    elif type == "AUROC":
-        if ave == 'macro':
-            return metrics.AUROC(args['metrics']['task'] ,ave, model_args)
-        elif ave == 'weighted':
-            return metrics.AUROC(args['metrics']['task'] ,ave, model_args)
-
-    elif type == "AUPRC":
-        return metrics.AUPRC(args['metrics']['task'] ,ave, model_args)
-    
-
-def get_loss(args):
-    
-    if args['type'] == "Weighted_CE_loss":
-
-        return Weighted_CE_Loss(torch.tensor(args['weight']))
+d
     
 
     
