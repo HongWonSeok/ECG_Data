@@ -26,62 +26,27 @@ class Metrics:
         label = label.tolist()
         self.predictions += prediction
         self.labels += label
- 
-    
-    # def AUROC(self, args, model_args):
-
-    #     auroc = AUROC(task=args['task'], num_classes=model_args['num_classes'], average=args['average'])
-    #     return auroc
-    
-    
-    # def f1_score(self, args, model_args):
-
-    #     f1_weighted = F1Score(task=args['task'], num_classes=model_args['num_classes'], average=args['average'])
-    #     return f1_weighted
-    
-
-    
-    # def AUPRC(self, args, model_args):
-
-    #     auprc = AveragePrecision(task=args['task'], num_classes=model_args['num_classes'], average=args['average'])
-    #     return auprc
-    
-    def AUROC(self, task_, ave, model_args):
-
-        auroc = AUROC(task=task_, num_classes=model_args['num_classes'], average=ave)
+        
+        
+    def AUROC(self, args, model_args):
+           
+        auroc = AUROC(task=args['task'], num_classes=model_args['num_classes'], average=args['average'])
         return auroc
     
     
-    def f1_score(self, task_, ave, model_args):
+    def f1_score(self, args, model_args):
 
-        f1_weighted = F1Score(task=task_, num_classes=model_args['num_classes'], average=ave)
+        f1_weighted = F1Score(task=args['task'], num_classes=model_args['num_classes'], average=args['average'])
         return f1_weighted
     
 
     
-    def AUPRC(self, task_, ave, model_args):
+     def AUPRC(self, args, model_args):
 
-        auprc = AveragePrecision(task=task_, num_classes=model_args['num_classes'], average=ave)
+        auprc = AveragePrecision(task=args['task'], num_classes=model_args['num_classes'], average=args['average'])
         return auprc
-
-
-
-
     
-    def sensitivity(self):
-        pass
 
-    @property
-    def specificity(self):
-        pass
-
-    @property
-    def recall(self):
-        pass
-
-    @property
-    def accuracy(self):
-        pass
 
     def confusion_matrix(self):
         cm = confusion_matrix(self.labels, self.predictions)
