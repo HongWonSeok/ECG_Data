@@ -36,4 +36,17 @@
   * ECG데이터 하나마다 18000까지의 길이까지 가져오고, 길이가 18000이 안되면 padding을 걸어줍니다.
   * 이렇게 get_item()이 구성됩니다.
   
+-----
+
+### 사용법
+
+1. Icentia
+```
+python train.py --config ./configs/config_Icentia_batch.json
+```
+
+2. PhysioNet/CinC2017
+```
+python train.py --config ./configs/config_CinC.json
+```
 
