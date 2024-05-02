@@ -1,0 +1,67 @@
+{
+    "data_loader": {
+        "type" : "CinC",
+        "args" : {
+            "class" : "binary",
+            "batch_size" : 64,
+            "num_workers" :8,
+            "path" :  "/data/common/CinC_dataset/train/training2017",
+            "aug" : true,
+            "unfold" : false,
+            "spectrogram" : false
+        }
+    
+    },
+
+    "model" : {
+        "type" : "MLP",
+        "args":{
+            "num_classes":  2
+        }
+    },
+
+    "optimizer" : {
+        "type" : "Adam",
+        "args": {
+            "lr" : 2e-4,
+            "weight_decay" : 1e-4
+        }
+    },
+
+    "metric" : {
+        "type" : "AUPRC",
+        "task" : "multiclass",
+        "average" : "macro"
+      
+    },
+
+
+
+
+    "loss" :{
+        "type" : "Weighted_CE_loss",
+        "weight" : [1.0, 1.0]
+ 
+    },
+
+    "trainer" : {
+        "num_epochs" : 150,
+        "early_stopping_epochs" : 25,
+        "lr" : 2e-4,
+        "weight_decay" : 1e-4,
+        "best_model_path" : "/data/hongwonseok/ECG-SNN/best_model/CinC/model_full_data.pth",
+        "T_max": 50,
+        "eta_min" : 1e-5
+    },
+
+    "tensorboard": {
+        "act" : true,
+        "path" : "./result/CinC_multi_MLP_full_data_transformer"
+    },
+
+
+    "device" : {
+        "gpu" : "2",
+        "cuda" : "cuda"
+    }
+}
