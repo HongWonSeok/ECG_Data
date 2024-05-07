@@ -57,7 +57,8 @@ def get_data_loaders(data_args, model_args):
             print("DataSet : Icentia_batch")
             
             path = data_args['args']['path']
-            
+
+            # 총 11000명에 대해 train 10000명 valid 1000명
             TRAINING_SPLIT_ICENTIA11K = list(range(10000))
             VALIDATION_SPLIT_ICENTIA11K = list(range(10000,11000))
 
@@ -71,7 +72,12 @@ def get_data_loaders(data_args, model_args):
             
             if model_args['type'] == 'MLP':
                 '''
-                signal type : 
+                class type : binary
+                unfold : unfod여부 
+                spectrogram_control : spectrogram 변환 여부, dataloder에는 구현되어있지만, train epoch코드에는 아직 미구현 필요시 추가하면됨.
+                signal type : beat
+                ecg_crop_length : segment하나당 어느정도의 길이로 자를 것인지에 관한 것, crop
+                ecg_sequence_length : 총 padding되는 길이, beat는 500, rythm은 18000으로 설정.
                 '''
                 return {
                     Mode.train: data.DataLoader(
@@ -95,13 +101,20 @@ def get_data_loaders(data_args, model_args):
             path = data_args['args']['path']
             
             print("DataSet : PhysioNet/CinC")
-            
+
+            # load_references()를 통해 signal과 label를 받아와서 사용
             ecg_leads, ecg_labels, fs, ecg_names = load_references(path)
         
-            
+
+            # configs/CinC_split.py에 작성되어있음.
+            # Icentia에서의 official은 아니고, README에 작성된 논문에서 이렇게 사용하여서 그대로 사용함.
             training_split = TRAINING_SPLIT_CHALLANGE
             validation_split = VALIDATION_SPLIT_CHALLANGE
-            
+
+            '''
+            AugmentationPipeline : data/augmentations.py에 작성되어있음.
+            AUGMENTATION_PIPELINE_CONFIG_2C : data/augmentations.py에 작성되어있음.
+            '''
                 
             return {
                     Mode.train: data.DataLoader(
