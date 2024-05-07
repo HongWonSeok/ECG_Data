@@ -60,7 +60,8 @@ def get_data_loaders(data_args, model_args):
             
             TRAINING_SPLIT_ICENTIA11K = list(range(10000))
             VALIDATION_SPLIT_ICENTIA11K = list(range(10000,11000))
-            
+
+            # beat와 rythm에 따라 각 segment를 랜덤으로 자르는 길이를 다르게함.
             if data_args['args']['signal_type'] == 'beat':
                 crop = (250,500)
                 ecg_length = 500
@@ -69,6 +70,9 @@ def get_data_loaders(data_args, model_args):
                 ecg_length = 18000
             
             if model_args['type'] == 'MLP':
+                '''
+                signal type : 
+                '''
                 return {
                     Mode.train: data.DataLoader(
                         IcentiaLoader_MLP_batch(path,split = TRAINING_SPLIT_ICENTIA11K, class_type = data_args['args']['class'], unfold = data_args['args']['unfold'], 
