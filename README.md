@@ -36,7 +36,9 @@ The data loader and data refer to the study `ECG-DualNet: Atrial Fibrillation Cl
   * The `load_references()` function in `util.py` is used to retrieve the ECG signals and the corresponding list of labels.
   * For each ECG data, it is collected up to a length of 18,000. If the length does not reach 18,000, padding is applied.
 
-  
+
+### MIT-BIH
+- The MIT-BIH code has also been included.
 
 
 ## How to use
