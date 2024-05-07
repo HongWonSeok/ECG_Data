@@ -49,14 +49,14 @@
         "early_stopping_epochs" : 25,
         "lr" : 2e-4,
         "weight_decay" : 1e-4,
-        "best_model_path" : "/data/hongwonseok/ECG-SNN/best_model/CinC/model_full_data.pth",
+        "best_model_path" : "/data/ECG-SNN/best_model/CinC/model_full_data.pth",
         "T_max": 50,
         "eta_min" : 1e-5
     },
 
     "tensorboard": {
         "act" : true,
-        "path" : "./result/CinC_multi_MLP_full_data_transformer"
+        "path" : "./result/CinC"
     },
 
 
