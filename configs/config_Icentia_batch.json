@@ -5,7 +5,7 @@
             "class" : "binary",
             "batch_size" : 2000,
             "num_workers" :8,
-            "path" :  "/data/hongwonseok/Icentia_dualnet/Icentia_dualnet/icentia11k",
+            "path" :  "/data/Icentia_dualnet/Icentia_dualnet/icentia11k",
             "signal_type" : "beat",
             "unfold" : false,
             "spectrogram" : false
