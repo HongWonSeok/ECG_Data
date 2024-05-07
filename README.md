@@ -41,6 +41,9 @@ The data loader and data refer to the study `ECG-DualNet: Atrial Fibrillation Cl
 - The MIT-BIH code has also been included.
 
 
+</br>
+</br>
+
 ## How to use
 
 1. Icentia
