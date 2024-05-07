@@ -47,7 +47,7 @@
         "early_stopping_epochs" : 25,
         "lr" : 2e-4,
         "weight_decay" : 1e-4,
-        "best_model_path" : "/data/hongwonseok/ECG-SNN/best_model/MLP/mul_MLP_model_25.pth",
+        "best_model_path" : "/data/ECG-SNN/best_model/MLP/mul_MLP_model_25.pth",
         "T_max": 50,
         "eta_min" : 1e-5
     },
