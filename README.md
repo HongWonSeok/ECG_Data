@@ -39,7 +39,7 @@ The data loader and data refer to the study `ECG-DualNet: Atrial Fibrillation Cl
   
 
 
-## 사용법
+## How to use
 
 1. Icentia
 ```
